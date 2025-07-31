@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Access | Finance & Entrepreneurship Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-1: #6e45e2;
+            --color-2: #ff7e5f;
+            --color-3: #88d3ce;
+            --color-4: #ff9a5a;
+            --color-5: #a18cd1;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--color-1), var(--color-2));
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fff, var(--color-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .main-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Courses Grid */
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+        
+        .course-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .course-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--color-1), var(--color-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .course-card p {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .course-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .course-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .primary-btn {
+            background: linear-gradient(45deg, var(--color-1), var(--color-3));
+            color: white;
+        }
+        
+        .secondary-btn {
+            background: rgba(255,255,255,0.9);
+            color: var(--dark);
+        }
+        
+        .course-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Dropdown Tools */
+        .tools-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: 40px;
+        }
+        
+        .dropbtn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .dropbtn:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+        }
+        
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 15px 20px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f1f1f1;
+            padding-left: 25px;
+        }
+        
+        .dropdown-content a i {
+            margin-right: 10px;
+            color: var(--color-1);
+        }
+        
+        .tools-dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* AI Assistant */
+        .ai-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--color-2), var(--color-4));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .ai-assistant:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .ai-assistant i {
+            font-size: 2rem;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* AI Chat Modal */
+        .ai-modal {
+            display: none;
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            width: 350px;
+            max-height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        
+        .ai-modal.active {
+            display: flex;
+            animation: fadeInUp 0.3s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .ai-header {
+            background: linear-gradient(90deg, var(--color-1), var(--color-3));
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ai-header h3 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .close-ai {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .ai-chat {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .ai-message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .ai-bot {
+            align-self: flex-start;
+            background: #f1f1f1;
+            color: var(--dark);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .ai-user {
+            align-self: flex-end;
+            background: var(--color-1);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .ai-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .ai-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .ai-input button {
+            background: var(--color-1);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            background: #f1f1f1;
+            border-radius: 15px;
+            align-self: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background: #999;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .main-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .courses {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .course-btn {
+                width: 100%;
+            }
+            
+            .ai-modal {
+                width: 90%;
+                right: 5%;
+                bottom: 100px;
+                max-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">LUCKY ACCESS</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#dropdown tools">Courses</a>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <section class="main-content">
+            <h1>Master Financial Skills <br>For All Stages</h1>
+            <p style="color: white; opacity: 0.9; max-width: 700px; margin: 0 auto;">From students to professionals - learn accounting, finance, banking, and entrepreneurship with interactive tools.</p>
+            
+            <!-- Courses Grid -->
+            <div class="courses">
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Accounting</h3>
+                    <p>Master bookkeeping, financial statements, and tax principles.</p>
+                    <div class="course-actions">
+                        <a href="accounting.html">  <button class="course-btn primary-btn">Start Course</button></a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Finance</h3>
+                    <p>Learn investments, financial modeling, and risk management.</p>
+                    <div class="course-actions">
+                        <a href="finance.html"> <button class="course-btn primary-btn">Start Course</button></a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3>Banking</h3>
+                    <p>Understand loans, credit systems, and financial regulations.</p>
+                    <div class="course-actions">
+                        <a href="banking.html"><button class="course-btn primary-btn">Start Course</button></a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Entrepreneurship</h3>
+                    <p>Build startups, pitch ideas, and manage business growth.</p>
+                    <div class="course-actions">
+                        <a href="entreprenuer.html"><button class="course-btn primary-btn">Start Course</button></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dropdown Tools -->
+            <div class="tools-dropdown">
+                <button class="dropbtn"><i class="fas fa-tools"></i> Learning Tools</button>
+                <div class="dropdown-content">
+                    <a href="curency converter.html"><i class="fas fa-exchange-alt"></i> Currency Converter</a>
+                    <a href="budget planner.html"><i class="fas fa-wallet"></i> Budget Planner</a>
+                    <a href="financial cal.html"><i class="fas fa-calculator"></i> Financial Calculators</a>
+                    <a href="quiz.html"><i class="fas fa-question-circle"></i> Practice Quizzes</a>
+                    <a href="bank information.html"><i class="fas fa-university"></i> Bank Information</a>
+                    <a href="forum.html"><i class="fas fa-comments"></i> Discussion Forum</a>
+                    <a href="feedback.html"><i class="fas fa-envelope"></i> Feedback</a>
+                </div>
+            </div>
+        </section>
+    
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Knowledge Database
+        const knowledgeBase = {
+            // Accounting Knowledge
+            accounting: {
+                "accounting equation": {
+                    answer: "The fundamental accounting equation is: <strong>Assets = Liabilities + Owner's Equity</strong>. This equation must always balance and forms the foundation of double-entry bookkeeping.",
+                    keywords: ["basic", "equation", "balance sheet"]
+                },
+                "double-entry": {
+                    answer: "Double-entry bookkeeping is a system where every financial transaction affects at least two accounts with equal debits and credits. This ensures the accounting equation always balances. For example, when you receive cash from a sale, you debit Cash and credit Revenue.",
+                    keywords: ["bookkeeping", "debit", "credit"]
+                },
+                "financial statements": {
+                    answer: "The three main financial statements are:<br>1. <strong>Balance Sheet</strong> (shows assets, liabilities, equity)<br>2. <strong>Income Statement</strong> (shows revenues, expenses, profit)<br>3. <strong>Cash Flow Statement</strong> (shows cash inflows/outflows)",
+                    keywords: ["reports", "balance sheet", "income statement", "cash flow"]
+                },
+                "depreciation": {
+                    answer: "Depreciation is the systematic allocation of the cost of a tangible asset over its useful life. Common methods include:<br>1. Straight-line (equal amounts each year)<br>2. Declining balance (higher amounts early)<br>3. Units of production (based on usage)",
+                    keywords: ["assets", "expense", "allocation"]
+                },
+                "gaap": {
+                    answer: "GAAP (Generally Accepted Accounting Principles) are the standard framework of guidelines for financial accounting in the U.S. They include standards, conventions, and rules that accountants follow in recording and summarizing transactions and preparing financial statements.",
+                    keywords: ["standards", "principles", "financial reporting"]
+                }
+            },
+            
+            // Finance Knowledge
+            finance: {
+                "time value of money": {
+                    answer: "The time value of money (TVM) is the concept that money available now is worth more than the same amount in the future due to its potential earning capacity. This core principle of finance holds that, provided money can earn interest, any amount of money is worth more the sooner it is received.",
+                    keywords: ["interest", "present value", "future value"]
+                },
+                "roi": {
+                    answer: "ROI (Return on Investment) is a performance measure used to evaluate the efficiency of an investment. It's calculated as: <strong>ROI = (Net Profit / Cost of Investment) × 100</strong>. For example, if you invest $1,000 and earn $1,200, your ROI is (200/1000)×100 = 20%.",
+                    keywords: ["return", "investment", "performance"]
+                },
+                "compound interest": {
+                    answer: "Compound interest is interest calculated on the initial principal and also on the accumulated interest of previous periods. The formula is <strong>A = P(1 + r/n)^(nt)</strong>, where:<br>A = amount<br>P = principal<br>r = rate<br>n = compounding periods per year<br>t = years",
+                    keywords: ["interest", "savings", "growth"]
+                },
+                "diversification": {
+                    answer: "Diversification is a risk management strategy that mixes a wide variety of investments within a portfolio. The rationale is that a portfolio of different kinds of investments will, on average, yield higher returns and pose lower risk than any individual investment.",
+                    keywords: ["risk", "portfolio", "investments"]
+                },
+                "credit score": {
+                    answer: "A credit score is a number between 300-850 that represents a consumer's creditworthiness. Factors affecting it include:<br>1. Payment history (35%)<br>2. Amounts owed (30%)<br>3. Length of credit history (15%)<br>4. New credit (10%)<br>5. Credit mix (10%)",
+                    keywords: ["credit", "loan", "fico"]
+                }
+            },
+            
+            // Banking Knowledge
+            banking: {
+                "types of accounts": {
+                    answer: "Common bank account types include:<br>1. <strong>Checking accounts</strong> (for daily transactions)<br>2. <strong>Savings accounts</strong> (for saving money with interest)<br>3. <strong>Money market accounts</strong> (higher interest with limits)<br>4. <strong>CDs</strong> (fixed-term deposits with fixed interest)",
+                    keywords: ["checking", "savings", "deposits"]
+                },
+                "loan types": {
+                    answer: "Major loan types include:<br>1. <strong>Personal loans</strong> (for any purpose)<br>2. <strong>Mortgages</strong> (for property)<br>3. <strong>Auto loans</strong> (for vehicles)<br>4. <strong>Student loans</strong> (for education)<br>5. <strong>Business loans</strong> (for companies)",
+                    keywords: ["borrowing", "credit", "mortgage"]
+                },
+                "interest rates": {
+                    answer: "Banks determine interest rates based on:<br>1. Central bank rates<br>2. Inflation<br>3. Economic conditions<br>4. Borrower's creditworthiness<br>5. Loan type and term<br><br>Higher risk loans typically have higher interest rates.",
+                    keywords: ["apr", "borrowing cost", "finance charge"]
+                },
+                "online banking": {
+                    answer: "Online banking provides these key features:<br>1. Account monitoring<br>2. Funds transfer<br>3. Bill payment<br>4. Mobile check deposit<br>5. Account alerts<br><br>Always use secure connections and enable two-factor authentication for safety.",
+                    keywords: ["digital", "mobile", "internet"]
+                }
+            },
+            
+            // Entrepreneurship Knowledge
+            entrepreneurship: {
+                "business plan": {
+                    answer: "A good business plan should include:<br>1. Executive summary<br>2. Company description<br>3. Market analysis<br>4. Organization structure<br>5. Product/service line<br>6. Marketing & sales strategies<br>7. Funding request<br>8. Financial projections",
+                    keywords: ["planning", "document", "strategy"]
+                },
+                "startup funding": {
+                    answer: "Common startup funding options:<br>1. Bootstrapping (self-funding)<br>2. Friends & family<br>3. Angel investors<br>4. Venture capital<br>5. Crowdfunding<br>6. Bank loans<br>7. Government grants<br><br>Each has different requirements and trade-offs.",
+                    keywords: ["capital", "investment", "money"]
+                },
+                "marketing strategies": {
+                    answer: "Effective marketing strategies for startups:<br>1. Social media marketing<br>2. Content marketing<br>3. Email marketing<br>4. SEO (Search Engine Optimization)<br>5. Influencer partnerships<br>6. Referral programs<br><br>Focus on your target audience and track ROI.",
+                    keywords: ["promotion", "advertising", "branding"]
+                },
+                "swot analysis": {
+                    answer: "SWOT analysis evaluates:<br>1. <strong>Strengths</strong> (internal advantages)<br>2. <strong>Weaknesses</strong> (internal limitations)<br>3. <strong>Opportunities</strong> (external favorable factors)<br>4. <strong>Threats</strong> (external challenges)<br><br>It helps businesses leverage strengths and address weaknesses.",
+                    keywords: ["analysis", "strategy", "planning"]
+                },
+                "minimum viable product": {
+                    answer: "An MVP (Minimum Viable Product) is a version of a new product with just enough features to satisfy early customers and provide feedback for future development. Benefits include:<br>1. Faster time to market<br>2. Lower development costs<br>3. Real user feedback<br>4. Validation of business ideas",
+                    keywords: ["lean", "product", "development"]
+                }
+            },
+            
+       
+
+        // DOM Elements
+        const aiAssistant = document.getElementById('aiAssistant');
+        const aiModal = document.getElementById('aiModal');
+        const closeAI = document.getElementById('closeAI');
+        const aiChat = document.getElementById('aiChat');
+        const aiUserInput = document.getElementById('aiUserInput');
+        const aiSend = document.getElementById('aiSend');
+
+        // Toggle AI Modal
+        aiAssistant.addEventListener('click', () => {
+            aiModal.classList.toggle('active');
+        });
+
+        closeAI.addEventListener('click', () => {
+            aiModal.classList.remove('active');
+        });
+
+        // Add message to chat
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('ai-message', `ai-${sender}`);
+            messageDiv.innerHTML = message;
+            aiChat.appendChild(messageDiv);
+            aiChat.scrollTop = aiChat.scrollHeight;
+        }
+
+        // Show typing indicator
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.classList.add('typing-indicator');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<span></span><span></span><span></span>';
+            aiChat.appendChild(typingDiv);
+            aiChat.scrollTop = aiChat.scrollHeight;
+            return typingDiv;
+        }
+
+        // Hide typing indicator
+        function hideTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        // Process user question
+        function processQuestion(question) {
+            // Convert to lowercase for easier matching
+            const lowerQuestion = question.toLowerCase();
+            
+            // Check for greetings
+            if (lowerQuestion.includes('hi') || lowerQuestion.includes('hello') || lowerQuestion.includes('hey')) {
+                return knowledgeBase.general.hello.answer;
+            }
+            
+            // Check for help
+            if (lowerQuestion.includes('help') || lowerQuestion.includes('what can you do')) {
+                return knowledgeBase.general.help.answer;
+            }
+            
+            // Search knowledge base
+            let bestMatch = null;
+            let bestScore = 0;
+            let bestCategory = null;
+            
+            // Search all categories
+            for (const category in knowledgeBase) {
+                for (const term in knowledgeBase[category]) {
+                    // Check if question contains term or keywords
+                    const termInQuestion = lowerQuestion.includes(term);
+                    let keywordMatches = 0;
+                    
+                    if (knowledgeBase[category][term].keywords) {
+                        keywordMatches = knowledgeBase[category][term].keywords.filter(keyword => 
+                            lowerQuestion.includes(keyword)
+                        ).length;
+                    }
+                    
+                    // Score based on term and keyword matches
+                    const score = (termInQuestion ? 2 : 0) + keywordMatches;
+                    
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMatch = knowledgeBase[category][term].answer;
+                        bestCategory = category;
+                    }
+                }
+            }
+            
+            // If found a match
+            if (bestMatch) {
+                return bestMatch;
+            }
+            
+            // Default response if no match found
+            return "I'm not sure I understand your question. Try asking about:<br><br>" +
+                   "- Accounting principles<br>" +
+                   "- Financial calculations<br>" +
+                   "- Banking information<br>" +
+                   "- Business startup advice<br><br>" +
+                   "For example: 'What is double-entry bookkeeping?' or 'How does compound interest work?'";
+        }
+
+        // Handle user input
+        function handleUserInput() {
+            const question = aiUserInput.value.trim();
+            if (question === '') return;
+            
+            // Add user message
+            addMessage('user', question);
+            aiUserInput.value = '';
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Simulate AI thinking time
+            setTimeout(() => {
+                // Remove typing indicator
+                hideTyping();
+                
+                // Get and display response
+                const response = processQuestion(question);
+                addMessage('bot', response);
+            }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+        }
+
+        // Event Listeners
+        aiSend.addEventListener('click', handleUserInput);
+        aiUserInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleUserInput();
+        });
+
+        // Rotate gradient colors dynamically
+        const root = document.documentElement;
+        const colors = ['#6e45e2', '#ff7e5f', '#88d3ce', '#a18cd1', '#ff9a5a'];
+        let currentColor = 0;
+        
+        function changeGradient() {
+            currentColor = (currentColor + 1) % colors.length;
+            const nextColor = (currentColor + 1) % colors.length;
+            root.style.setProperty('--color-1', colors[currentColor]);
+            root.style.setProperty('--color-2', colors[nextColor]);
+        }
+        
+        setInterval(changeGradient, 5000);
+        
+        // Course button functionality
+        document.querySelectorAll('.primary-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const courseTitle = this.closest('.course-card').querySelector('h3').textContent;
+                alert(`Starting "${courseTitle}" course!`);
+                // In a real implementation, this would redirect to the course page
+            });
+        });
+    </script>
+</body>
+</html>

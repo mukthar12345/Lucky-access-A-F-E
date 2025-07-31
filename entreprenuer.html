@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Access | Entrepreneurship Mastery</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #6e45e2;
+            --secondary: #88d3ce;
+            --accent: #ff7e5f;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Course Hero */
+        .course-hero {
+            background: linear-gradient(135deg, rgba(110, 69, 226, 0.1) 0%, rgba(136, 211, 206, 0.1) 100%);
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .course-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .course-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--dark);
+        }
+        
+        /* Course Tabs */
+        .course-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Course Content */
+        .course-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .course-section h2 {
+            color: var(--primary);
+            margin: 40px 0 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+        
+        .course-section h3 {
+            color: var(--dark);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+        
+        .course-section p, .course-section ul {
+            margin-bottom: 15px;
+        }
+        
+        .course-section ul {
+            padding-left: 20px;
+        }
+        
+        .course-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* Business Model Canvas */
+        .business-model {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .bm-section {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 150px;
+            border: 1px solid #eee;
+        }
+        
+        .bm-section h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 25px 0;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Calculator Section */
+        .calculator {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .calculator h4 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .calculator input, .calculator select {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .calculator button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .calculator button:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .calculator-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(110, 69, 226, 0.1);
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        /* Quiz Section */
+        .quiz-question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .quiz-options {
+            margin-top: 15px;
+        }
+        
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background: #e0e0e0;
+        }
+        
+        .quiz-option.correct {
+            background: var(--success);
+            color: white;
+        }
+        
+        .quiz-option.incorrect {
+            background: #F44336;
+            color: white;
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .course-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .course-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .business-model {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">LUCKY ACCESS</div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="#">Courses</a>
+                    <a href="#">Tools</a>
+                    <a href="#">Community</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <h1><i class="fas fa-lightbulb"></i> Entrepreneurship Mastery</h1>
+            <p>Turn your business idea into reality with our complete startup guide covering ideation, funding, and growth strategies.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Course Tabs -->
+        <div class="course-tabs">
+            <button class="tab-btn active" onclick="openTab('overview')">Startup Guide</button>
+            <button class="tab-btn" onclick="openTab('funding')">Funding Options</button>
+            <button class="tab-btn" onclick="openTab('planning')">Business Planning</button>
+            <button class="tab-btn" onclick="openTab('tools')">Business Tools</button>
+            <button class="tab-btn" onclick="openTab('quizzes')">Quizzes</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="course-section">
+                <h2>From Idea to Business</h2>
+                <p>Starting a business requires careful planning and execution. Follow these steps to launch your startup successfully:</p>
+                
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UEngvxZ11sw?si=z1Tb7PM-tYi6MhJv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <h3>Step-by-Step Startup Process</h3>
+                <ol>
+                    <li><strong>Idea Generation</strong> - Identify problems to solve</li>
+                    <li><strong>Market Research</strong> - Validate demand</li>
+                    <li><strong>Business Model</strong> - Define how you'll create value</li>
+                    <li><strong>Legal Structure</strong> - Choose business entity</li>
+                    <li><strong>Product Development</strong> - Build your MVP</li>
+                    <li><strong>Funding Strategy</strong> - Secure capital</li>
+                    <li><strong>Launch & Marketing</strong> - Acquire customers</li>
+                    <li><strong>Growth & Scaling</strong> - Expand operations</li>
+                </ol>
+            </div>
+
+            <div class="course-section">
+                <h2>Business Model Canvas</h2>
+                <p>Visualize your business model with this strategic management template:</p>
+                
+                <div class="business-model">
+                    <div class="bm-section">
+                        <h4>Key Partners</h4>
+                        <p>Who are your key suppliers/partners?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Key Activities</h4>
+                        <p>What activities create value?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Value Propositions</h4>
+                        <p>What problem do you solve?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Customer Relationships</h4>
+                        <p>How do you interact with customers?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Customer Segments</h4>
+                        <p>Who are your target customers?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Key Resources</h4>
+                        <p>What resources do you need?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Channels</h4>
+                        <p>How do you reach customers?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Cost Structure</h4>
+                        <p>What are your major costs?</p>
+                    </div>
+                    <div class="bm-section">
+                        <h4>Revenue Streams</h4>
+                        <p>How will you make money?</p>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="downloadCanvas()">
+                    <i class="fas fa-download"></i> Download Canvas Template
+                </button>
+            </div>
+        </div>
+
+        <!-- Funding Tab -->
+        <div id="funding" class="tab-content">
+            <div class="course-section">
+                <h2>Startup Funding Options</h2>
+                
+                <h3>1. Bootstrapping</h3>
+                <p>Funding your business with personal savings and revenue:</p>
+                <ul>
+                    <li>Pros: Full control, no debt</li>
+                    <li>Cons: Limited resources, slower growth</li>
+                </ul>
+                
+                <h3>2. Angel Investors</h3>
+                <p>Wealthy individuals who provide capital for startups:</p>
+                <ul>
+                    <li>Typical investment: $25k - $100k</li>
+                    <li>Often take equity in return</li>
+                </ul>
+                
+                <h3>3. Venture Capital</h3>
+                <p>Professional investors funding high-growth startups:</p>
+                <ul>
+                    <li>Investments from $500k to millions</li>
+                    <li>Require significant equity and control</li>
+                </ul>
+                
+                <h3>4. Crowdfunding</h3>
+                <p>Raising small amounts from many people online:</p>
+                <ul>
+                    <li>Platforms: Kickstarter, Indiegogo, GoFundMe</li>
+                    <li>Reward-based or equity-based models</li>
+                </ul>
+                
+                <h3>5. Small Business Loans</h3>
+                <p>Traditional financing from banks or SBA:</p>
+                <ul>
+                    <li>Need good credit and business plan</li>
+                    <li>Debt must be repaid with interest</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Planning Tab -->
+        <div id="planning" class="tab-content">
+            <div class="course-section">
+                <h2>Business Planning Essentials</h2>
+                
+                <h3>Executive Summary</h3>
+                <p>1-2 page overview of your business concept:</p>
+                <ul>
+                    <li>Business name and location</li>
+                    <li>Products/services offered</li>
+                    <li>Target market</li>
+                    <li>Competitive advantage</li>
+                    <li>Financial highlights</li>
+                </ul>
+                
+                <h3>Market Analysis</h3>
+                <div class="calculator">
+                    <h4>Market Size Calculator</h4>
+                    <label for="targetCustomers">Target Customers</label>
+                    <input type="number" id="targetCustomers" placeholder="e.g., 100,000">
+                    
+                    <label for="purchaseFreq">Annual Purchases per Customer</label>
+                    <input type="number" id="purchaseFreq" placeholder="e.g., 2">
+                    
+                    <label for="avgPrice">Average Price ($)</label>
+                    <input type="number" id="avgPrice" placeholder="e.g., 50">
+                    
+                    <button onclick="calculateMarketSize()">Calculate</button>
+                    
+                    <div class="calculator-result" id="marketSizeResult">
+                        Total Addressable Market: $0
+                    </div>
+                </div>
+                
+                <h3>Financial Projections</h3>
+                <p>3-5 year forecasts including:</p>
+                <ul>
+                    <li>Startup costs</li>
+                    <li>Monthly expenses</li>
+                    <li>Sales forecasts</li>
+                    <li>Profit & loss statements</li>
+                    <li>Cash flow projections</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tools Tab -->
+        <div id="tools" class="tab-content">
+            <div class="course-section">
+                <h2>Entrepreneurial Tools</h2>
+                
+                <div class="calculator">
+                    <h4>Break-Even Calculator</h4>
+                    <label for="fixedCosts">Fixed Costs ($)</label>
+                    <input type="number" id="fixedCosts" placeholder="e.g., 5000">
+                    
+                    <label for="variableCosts">Variable Costs per Unit ($)</label>
+                    <input type="number" id="variableCosts" placeholder="e.g., 10">
+                    
+                    <label for="sellingPrice">Selling Price per Unit ($)</label>
+                    <input type="number" id="sellingPrice" placeholder="e.g., 25">
+                    
+                    <button onclick="calculateBreakEven()">Calculate</button>
+                    
+                    <div class="calculator-result" id="breakEvenResult">
+                        Break-Even Point: 0 units
+                    </div>
+                </div>
+                
+                <div class="calculator">
+                    <h4>Startup Cost Estimator</h4>
+                    <label for="productCost">Product Development ($)</label>
+                    <input type="number" id="productCost" placeholder="e.g., 5000">
+                    
+                    <label for="marketingCost">Marketing ($)</label>
+                    <input type="number" id="marketingCost" placeholder="e.g., 3000">
+                    
+                    <label for="operationalCost">Operational Expenses ($)</label>
+                    <input type="number" id="operationalCost" placeholder="e.g., 2000">
+                    
+                    <label for="legalCost">Legal/Admin ($)</label>
+                    <input type="number" id="legalCost" placeholder="e.g., 1500">
+                    
+                    <button onclick="calculateStartupCost()">Calculate Total</button>
+                    
+                    <div class="calculator-result" id="startupCostResult">
+                        Total Startup Costs: $0
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quizzes Tab -->
+        <div id="quizzes" class="tab-content">
+            <div class="course-section">
+                <h2>Entrepreneurship Quiz</h2>
+                
+                <div class="quiz-question">
+                    <h4>1. What is the most common reason startups fail?</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Poor product quality</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">No market need</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Insufficient funding</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <h4>2. What does MVP stand for in startups?</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Most Valuable Product</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">Minimum Viable Product</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Maximum Value Proposition</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <h4>3. Which funding source doesn't require giving up equity?</h4>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">Small business loan</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Venture capital</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Angel investment</div>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Courses</h3>
+                    <ul>
+                        <li><a href="#">Accounting</a></li>
+                        <li><a href="#">Finance</a></li>
+                        <li><a href="#">Banking</a></li>
+                        <li><a href="#">Entrepreneurship</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Business Templates</a></li>
+                        <li><a href="#">Pitch Deck Examples</a></li>
+                        <li><a href="#">Market Research Tools</a></li>
+                        <li><a href="#">Legal Guides</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Lucky Access. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        function openTab(tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Business Model Canvas Download
+        function downloadCanvas() {
+            alert("In a complete implementation, this would download a Business Model Canvas template PDF");
+            // Actual implementation would generate/download a PDF template
+        }
+        
+        // Market Size Calculator
+        function calculateMarketSize() {
+            const customers = parseFloat(document.getElementById('targetCustomers').value) || 0;
+            const purchases = parseFloat(document.getElementById('purchaseFreq').value) || 0;
+            const price = parseFloat(document.getElementById('avgPrice').value) || 0;
+            
+            const marketSize = customers * purchases * price;
+            document.getElementById('marketSizeResult').textContent = 
+                `Total Addressable Market: $${marketSize.toLocaleString()}`;
+        }
+        
+        // Break-Even Calculator
+        function calculateBreakEven() {
+            const fixed = parseFloat(document.getElementById('fixedCosts').value) || 0;
+            const variable = parseFloat(document.getElementById('variableCosts').value) || 0;
+            const price = parseFloat(document.getElementById('sellingPrice').value) || 1;
+            
+            const breakEven = fixed / (price - variable);
+            document.getElementById('breakEvenResult').textContent = 
+                `Break-Even Point: ${Math.ceil(breakEven)} units ($${Math.ceil(breakEven * price)})`;
+        }
+        
+        // Startup Cost Calculator
+        function calculateStartupCost() {
+            const product = parseFloat(document.getElementById('productCost').value) || 0;
+            const marketing = parseFloat(document.getElementById('marketingCost').value) || 0;
+            const operational = parseFloat(document.getElementById('operationalCost').value) || 0;
+            const legal = parseFloat(document.getElementById('legalCost').value) || 0;
+            
+            const total = product + marketing + operational + legal;
+            document.getElementById('startupCostResult').textContent = 
+                `Total Startup Costs: $${total.toLocaleString()}`;
+        }
+        
+        // Quiz Functions
+        function checkAnswer(element, isCorrect) {
+            // Reset all options in this question
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+            
+            // Mark the selected option
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+        }
+        
+        function submitQuiz() {
+            const correct = document.querySelectorAll('.quiz-option.correct').length;
+            const total = document.querySelectorAll('.quiz-question').length;
+            alert(`You got ${correct} out of ${total} correct!`);
+        }
+    </script>
+</body>
+</html>

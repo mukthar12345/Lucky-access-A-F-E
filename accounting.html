@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Access | Accounting Course</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6e45e2;
+            --secondary: #88d3ce;
+            --accent: #ff7e5f;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4caf50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Course Hero */
+        .course-hero {
+            background: linear-gradient(135deg, rgba(110, 69, 226, 0.1) 0%, rgba(136, 211, 206, 0.1) 100%);
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .course-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .course-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--dark);
+        }
+        
+        /* Course Tabs */
+        .course-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: #f0f0f0;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Course Content */
+        .course-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .course-section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .course-section h3 {
+            margin: 25px 0 15px;
+            color: var(--dark);
+        }
+        
+        .course-section p, .course-section ul {
+            margin-bottom: 15px;
+        }
+        
+        .course-section ul {
+            padding-left: 20px;
+        }
+        
+        .course-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 25px 0;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Level Cards */
+        .level-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .level-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .level-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .level-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .course-hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">LUCKY ACCESS</div>
+                <div class="nav-links">
+                    <a href="homepage.html">Home</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <h1>Accounting Fundamentals</h1>
+            <p>Master the language of business with our comprehensive accounting curriculum designed for all learning levels.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Course Tabs -->
+        <div class="course-tabs">
+            <button class="tab-btn active" onclick="openTab('overview')">Overview</button>
+            <button class="tab-btn" onclick="openTab('secondary')">Secondary</button>
+            <button class="tab-btn" onclick="openTab('university')">University</button>
+            <button class="tab-btn" onclick="openTab('adult')">Adult/Professional</button>
+            <button class="tab-btn" onclick="openTab('videos')">Video Lessons</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="course-section">
+                <h2>Course Description</h2>
+                <p>This comprehensive accounting course covers everything from basic bookkeeping to advanced financial analysis. Whether you're a student preparing for exams or a professional looking to sharpen your skills, our curriculum adapts to your needs.</p>
+                
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>Fundamentals of financial accounting</li>
+                    <li>Double-entry bookkeeping system</li>
+                    <li>Preparation of financial statements</li>
+                    <li>Budgeting and financial planning</li>
+                    <li>Taxation principles</li>
+                    <li>Using accounting software</li>
+                    <li>Financial analysis techniques</li>
+                </ul>
+            </div>
+
+            <div class="course-section">
+                <h2>Learning Paths</h2>
+                <div class="level-cards">
+                    <div class="level-card">
+                        <i class="fas fa-school"></i>
+                        <h3>Secondary Level</h3>
+                        <p>Perfect for high school students covering basic accounting principles and introductory financial concepts.</p>
+                        <a href="#secondary" class="btn" onclick="openTab('secondary')">Explore</a>
+                    </div>
+                    <div class="level-card">
+                        <i class="fas fa-university"></i>
+                        <h3>University Level</h3>
+                        <p>Comprehensive coverage of accounting standards, financial reporting, and managerial accounting.</p>
+                        <a href="#university" class="btn" onclick="openTab('university')">Explore</a>
+                    </div>
+                    <div class="level-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Adult/Professional</h3>
+                        <p>Advanced topics for working professionals including forensic accounting and financial analysis.</p>
+                        <a href="#adult" class="btn" onclick="openTab('adult')">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secondary Level Tab -->
+        <div id="secondary" class="tab-content">
+            <div class="course-section">
+                <h2>Secondary School Curriculum</h2>
+                <p>Designed for students aged 14-18, this program introduces foundational accounting concepts through interactive lessons and practical exercises.</p>
+                
+                <h3>Topics Covered</h3>
+                <ul>
+                    <li>Introduction to accounting principles</li>
+                    <li>Basic bookkeeping</li>
+                    <li>Understanding debits and credits</li>
+                    <li>Simple financial statements</li>
+                    <li>Personal budgeting</li>
+                    <li>Introduction to taxes</li>
+                </ul>
+                
+                <h3>Sample Lesson: The Accounting Equation</h3>
+                <p>The fundamental accounting equation is: <strong>Assets = Liabilities + Owner's Equity</strong>. This equation must always balance, forming the foundation of all accounting systems.</p>
+                
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/KJ1t1ZWe0P0?si=aRLn2qDpuq_BKxyn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <a href="#" class="btn">Start Secondary Course</a>
+            </div>
+        </div>
+
+        <!-- University Level Tab -->
+        <div id="university" class="tab-content">
+            <div class="course-section">
+                <h2>University Level Program</h2>
+                <p>Comprehensive accounting education aligned with undergraduate business programs, covering both theoretical and practical aspects.</p>
+                
+                <h3>Curriculum Highlights</h3>
+                <ul>
+                    <li>Financial accounting standards (GAAP/IFRS)</li>
+                    <li>Managerial accounting techniques</li>
+                    <li>Advanced financial statement analysis</li>
+                    <li>Cost accounting systems</li>
+                    <li>Auditing principles</li>
+                    <li>Corporate taxation</li>
+                    <li>Accounting information systems</li>
+                </ul>
+                
+                <h3>Case Study: Financial Statement Analysis</h3>
+                <p>Learn to interpret balance sheets, income statements, and cash flow statements to assess a company's financial health.</p>
+                
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/hTU6HE64Wd0?si=aoMtusGSErhvFj8a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <a href="#" class="btn">Enroll in University Program</a>
+            </div>
+        </div>
+
+        <!-- Adult/Professional Tab -->
+        <div id="adult" class="tab-content">
+            <div class="course-section">
+                <h2>Professional Accounting Development</h2>
+                <p>Advanced training for working professionals, entrepreneurs, and career changers looking to master practical accounting skills.</p>
+                
+                <h3>Program Features</h3>
+                <ul>
+                    <li>Advanced financial reporting</li>
+                    <li>Forensic accounting techniques</li>
+                    <li>Business tax planning</li>
+                    <li>Budgeting and forecasting</li>
+                    <li>QuickBooks and Xero certification</li>
+                    <li>Financial dashboard creation</li>
+                    <li>CPA exam preparation (optional)</li>
+                </ul>
+                
+                <h3>Workshop: Creating Financial Dashboards</h3>
+                <p>Transform raw accounting data into actionable business insights with powerful visualizations.</p>
+                
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/zpYNeSxEHi8?si=KcaxXcgq5VjUwNJJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <a href="#" class="btn">Join Professional Program</a>
+            </div>
+        </div>
+
+        <!-- Videos Tab -->
+        <div id="videos" class="tab-content">
+            <div class="course-section">
+                <h2>Video Lesson Library</h2>
+                <p>Access our full collection of accounting tutorials, lectures, and demonstrations.</p>
+                
+                <div class="video-container" style="margin-bottom: 40px;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Gua2Bo_G-J0?si=oaoiftxbhAMzZFKK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                    <div class="video-container" style="margin-bottom: 40px;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/NyRhgoqhitg?si=woAYOjzZ_6-n5oKl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <h3>Featured Playlists</h3>
+                <ul>
+                    <li><strong>Accounting Basics</strong> - 15 videos (2.5 hours)</li>
+                    <li><strong>Financial Statements Deep Dive</strong> - 8 videos (3 hours)</li>
+                    <li><strong>Tax Preparation Guide</strong> - 12 videos (4 hours)</li>
+                    <li><strong>QuickBooks Tutorials</strong> - 20 videos (6 hours)</li>
+                    <li><strong>CPA Exam Review</strong> - 50 videos (30 hours)</li>
+                </ul>
+                
+                <a href="#" class="btn">Browse All Videos</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Courses</h3>
+                    <ul>
+                        <li><a href="#">Accounting</a></li>
+                        <li><a href="#">Finance</a></li>
+                        <li><a href="#">Banking</a></li>
+                        <li><a href="#">Entrepreneurship</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Calculators</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">E-books</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Lucky Access. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        function openTab(tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Set up video tab to show first video by default
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can add additional initialization here
+        });
+    </script>
+</body>
+</html>

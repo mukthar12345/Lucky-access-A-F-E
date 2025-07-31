@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Access | Budget Planner</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #6e45e2;
+            --secondary: #88d3ce;
+            --accent: #ff7e5f;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Calculator Hero */
+        .calculator-hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        
+        .calculator-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .calculator-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Calculator Section */
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .calculator-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .calculator-container h2 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        /* Budget Planner Styles */
+        .budget-planner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .budget-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .budget-section:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .budget-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .budget-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .budget-item input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .budget-item input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .budget-item input:focus {
+            outline: none;
+            border-color: white;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .budget-item input[type="number"] {
+            max-width: 120px;
+        }
+        
+        .remove-btn {
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            transform: rotate(90deg);
+            background: #ff5a35;
+        }
+        
+        .btn-small {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-small:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Results Section */
+        .calculator-results {
+            margin-top: 30px;
+        }
+        
+        .result-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .result-box:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .result-box h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .result-item strong {
+            font-weight: 600;
+        }
+        
+        /* Button */
+        .btn-calculate {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-calculate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+        }
+        
+        /* Charts */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .chart-container:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .chart-container h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 40px;
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .calculator-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .budget-planner {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">LUCKY ACCESS</div>
+                <div class="nav-links">
+                    <a href="homepage.html"><i class="fas fa-home"></i> Home</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Hero -->
+    <section class="calculator-hero">
+        <div class="container">
+            <h1><i class="fas fa-calculator"></i> BUDGET PLANNER</h1>
+            <p>Take control of your finances with our interactive budget calculator. Track your income and expenses to achieve your financial goals.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Budget Planner Calculator -->
+        <div class="calculator-container">
+            <h2>Personal Budget Calculator</h2>
+            
+            <div class="budget-planner">
+                <!-- Income Section -->
+                <div class="budget-section">
+                    <h3><i class="fas fa-money-bill-wave"></i> Income</h3>
+                    <div id="incomeItems">
+                        <div class="budget-item">
+                            <input type="text" placeholder="Income source" class="income-source">
+                            <input type="number" placeholder="Amount" class="income-amount">
+                            <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="addIncomeItem()"><i class="fas fa-plus"></i> Add Income</button>
+                </div>
+                
+                <!-- Expenses Section -->
+                <div class="budget-section">
+                    <h3><i class="fas fa-receipt"></i> Expenses</h3>
+                    <div id="expenseItems">
+                        <div class="budget-item">
+                            <input type="text" placeholder="Expense category" class="expense-category">
+                            <input type="number" placeholder="Amount" class="expense-amount">
+                            <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="addExpenseItem()"><i class="fas fa-plus"></i> Add Expense</button>
+                </div>
+            </div>
+            
+            <button class="btn-calculate" onclick="calculateBudget()"><i class="fas fa-calculator"></i> CALCULATE BUDGET</button>
+            
+            <div id="budgetResults" style="display: none;">
+                <div class="calculator-results">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;" class="result-grid">
+                        <!-- Budget Summary -->
+                        <div class="result-box">
+                            <h3><i class="fas fa-chart-pie"></i> Budget Summary</h3>
+                            <div class="result-item">
+                                <strong>Total Income:</strong>
+                                <span id="summaryIncome">$0.00</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>Total Expenses:</strong>
+                                <span id="summaryExpenses">$0.00</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>Remaining Balance:</strong>
+                                <span id="remainingBalance">$0.00</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Savings Potential -->
+                        <div class="result-box">
+                            <h3><i class="fas fa-piggy-bank"></i> Savings Potential</h3>
+                            <div class="result-item">
+                                <strong>Monthly Savings:</strong>
+                                <span id="monthlySavings">$0.00</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>Annual Savings:</strong>
+                                <span id="annualSavings">$0.00</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>5-Year Potential*:</strong>
+                                <span id="fiveYearSavings">$0.00</span>
+                            </div>
+                            <small style="opacity: 0.7;">*Assuming 3% annual interest</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts -->
+                <div class="chart-container">
+                    <h3><i class="fas fa-chart-bar"></i> Expense Breakdown</h3>
+                    <canvas id="expenseChart" height="300"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3><i class="fas fa-balance-scale"></i> Income vs Expenses</h3>
+                    <canvas id="budgetChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                &copy; 2023 Lucky Access. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Budget Planner Variables
+        let expenseChart, budgetChart;
+        
+        // Add Income Item
+        function addIncomeItem() {
+            const incomeItems = document.getElementById('incomeItems');
+            const newItem = document.createElement('div');
+            newItem.className = 'budget-item';
+            newItem.innerHTML = `
+                <input type="text" placeholder="Income source" class="income-source">
+                <input type="number" placeholder="Amount" class="income-amount">
+                <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-times"></i></button>
+            `;
+            incomeItems.appendChild(newItem);
+        }
+        
+        // Add Expense Item
+        function addExpenseItem() {
+            const expenseItems = document.getElementById('expenseItems');
+            const newItem = document.createElement('div');
+            newItem.className = 'budget-item';
+            newItem.innerHTML = `
+                <input type="text" placeholder="Expense category" class="expense-category">
+                <input type="number" placeholder="Amount" class="expense-amount">
+                <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-times"></i></button>
+            `;
+            expenseItems.appendChild(newItem);
+        }
+        
+        // Remove Item
+        function removeItem(button) {
+            button.parentElement.remove();
+            calculateBudget();
+        }
+        
+        // Calculate Budget
+        function calculateBudget() {
+            // Calculate total income
+            let totalIncome = 0;
+            const incomeItems = document.querySelectorAll('.income-amount');
+            incomeItems.forEach(item => {
+                totalIncome += parseFloat(item.value) || 0;
+            });
+            
+            // Calculate total expenses
+            let totalExpenses = 0;
+            const expenseItems = document.querySelectorAll('.expense-amount');
+            expenseItems.forEach(item => {
+                totalExpenses += parseFloat(item.value) || 0;
+            });
+            
+            // Calculate remaining balance
+            const remainingBalance = totalIncome - totalExpenses;
+            
+            // Calculate savings potential
+            const monthlySavings = remainingBalance > 0 ? remainingBalance : 0;
+            const annualSavings = monthlySavings * 12;
+            const fiveYearSavings = annualSavings * 5 * 1.03; // Simple 3% interest
+            
+            // Update summary
+            document.getElementById('summaryIncome').textContent = `$${totalIncome.toFixed(2)}`;
+            document.getElementById('summaryExpenses').textContent = `$${totalExpenses.toFixed(2)}`;
+            document.getElementById('remainingBalance').textContent = `$${remainingBalance.toFixed(2)}`;
+            document.getElementById('monthlySavings').textContent = `$${monthlySavings.toFixed(2)}`;
+            document.getElementById('annualSavings').textContent = `$${annualSavings.toFixed(2)}`;
+            document.getElementById('fiveYearSavings').textContent = `$${fiveYearSavings.toFixed(2)}`;
+            
+            // Show results
+            document.getElementById('budgetResults').style.display = 'block';
+            
+            // Create charts
+            createCharts(totalIncome, totalExpenses);
+        }
+        
+        // Create Budget Charts
+        function createCharts(totalIncome, totalExpenses) {
+            const ctxExpense = document.getElementById('expenseChart').getContext('2d');
+            const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+            
+            // Get expense categories and amounts
+            const expenseCategories = [];
+            const expenseAmounts = [];
+            const expenseElements = document.querySelectorAll('.budget-item');
+            
+            expenseElements.forEach(item => {
+                const category = item.querySelector('.expense-category');
+                const amount = item.querySelector('.expense-amount');
+                
+                if (category && amount && category.value && amount.value) {
+                    expenseCategories.push(category.value);
+                    expenseAmounts.push(parseFloat(amount.value));
+                }
+            });
+            
+            // Destroy previous charts if they exist
+            if (expenseChart) expenseChart.destroy();
+            if (budgetChart) budgetChart.destroy();
+            
+            // Expense Breakdown Chart
+            expenseChart = new Chart(ctxExpense, {
+                type: 'doughnut',
+                data: {
+                    labels: expenseCategories,
+                    datasets: [{
+                        data: expenseAmounts,
+                        backgroundColor: [
+                            '#6e45e2', '#88d3ce', '#ff7e5f', '#ffb347', '#4CAF50', 
+                            '#F44336', '#9C27B0', '#3F51B5', '#009688', '#795548'
+                        ],
+                        borderWidth: 1,
+                        borderColor: 'rgba(255, 255, 255, 0.2)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    family: 'Poppins'
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+            
+            // Income vs Expenses Chart
+            budgetChart = new Chart(ctxBudget, {
+                type: 'bar',
+                data: {
+                    labels: ['Income', 'Expenses', 'Balance'],
+                    datasets: [{
+                        label: 'Amount ($)',
+                        data: [totalIncome, totalExpenses, totalIncome - totalExpenses],
+                        backgroundColor: [
+                            'rgba(76, 175, 80, 0.7)',
+                            'rgba(244, 67, 54, 0.7)',
+                            totalIncome - totalExpenses >= 0 ? 'rgba(110, 69, 226, 0.7)' : 'rgba(255, 126, 95, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(76, 175, 80, 1)',
+                            'rgba(244, 67, 54, 1)',
+                            totalIncome - totalExpenses >= 0 ? 'rgba(110, 69, 226, 1)' : 'rgba(255, 126, 95, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Initialize with some items
+        window.addEventListener('DOMContentLoaded', function() {
+            addIncomeItem();
+            addExpenseItem();
+            addExpenseItem();
+            
+            // Add animation to calculator container
+            const calcContainer = document.querySelector('.calculator-container');
+            setTimeout(() => {
+                calcContainer.style.opacity = '1';
+                calcContainer.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
